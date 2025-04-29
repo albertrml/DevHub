@@ -43,6 +43,7 @@ dependencies {
 
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.compose.google.fonts)
+    implementation(libs.androidx.compose.hilt)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.material3)
@@ -51,10 +52,19 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.coil.compose)
     implementation(libs.coil.network.okhttp)
+    implementation(libs.kotlinx.coroutines.android)
+    implementation(libs.kotlinx.coroutines.core)
+    implementation(libs.squareup.moshi)
+    implementation(libs.squareup.moshi.kotlin)
+    implementation(libs.squareup.retrofit)
+    implementation(libs.squareup.retrofit.converter.moshi)
+
 
     implementation(platform(libs.androidx.compose.bom))
 
     testImplementation(libs.junit)
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.mockk)
 
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(libs.androidx.junit)
