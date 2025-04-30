@@ -1,4 +1,4 @@
-package br.com.arml.devhub.ui.screen
+package br.com.arml.devhub.ui.screen.user
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -12,28 +12,29 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import br.com.arml.devhub.R
-import br.com.arml.devhub.model.entity.DevUi
-import br.com.arml.devhub.model.mock.DevUiMock.mockDevs
+import br.com.arml.devhub.model.entity.GitHubUser
+import br.com.arml.devhub.model.mock.GitHubUserMock.mockDevs
+
 import br.com.arml.devhub.ui.component.AnimatedHorizontalDivider
-import br.com.arml.devhub.ui.screen.component.BodyRepository
-import br.com.arml.devhub.ui.screen.component.HeaderRepository
+import br.com.arml.devhub.ui.screen.component.userdatails.UserRepositoriesComponent
+import br.com.arml.devhub.ui.screen.component.userdatails.UserHeaderComponent
 import kotlin.random.Random
 
 @Composable
-fun RepositoriesScreen(
+fun UserScreen(
     modifier: Modifier = Modifier,
-    dev: DevUi = mockDevs[Random.nextInt(0,mockDevs.size-1)]
+    user: GitHubUser
 ){
 
     Column(
         modifier = modifier
     ) {
-        HeaderRepository(
+        UserHeaderComponent(
             modifier = modifier,
-            name = dev.name,
-            username = dev.username,
-            resume = dev.resume,
-            uriPhoto = dev.uriPhoto
+            name = user.name,
+            username = user.login,
+            bio = user.bio,
+            avatarUrl = user.avatarUrl
         )
 
         Spacer(modifier = Modifier.padding(16.dp))
@@ -52,15 +53,15 @@ fun RepositoriesScreen(
             thickness = 4.dp
         )
 
-        BodyRepository(
+        UserRepositoriesComponent(
             modifier = Modifier.padding(horizontal = 12.dp),
-            repositories = dev.repositories
+            repositories = user.repositories
         )
     }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun RepositoriesScreenPreview(){
-    RepositoriesScreen()
+fun UserScreenPreview(){
+    UserScreen(user = mockDevs[Random.nextInt(0,mockDevs.size-1)])
 }

@@ -1,4 +1,4 @@
-package br.com.arml.devhub.ui.screen.component
+package br.com.arml.devhub.ui.screen.component.userdatails
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -21,14 +21,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import br.com.arml.devhub.model.entity.RepositoryUi
-import br.com.arml.devhub.model.mock.DevUiMock.mockDevs
+import br.com.arml.devhub.model.entity.GitHubRepository
+import br.com.arml.devhub.model.mock.GitHubUserMock.mockDevs
 import kotlin.random.Random
 
 @Composable
-fun BodyRepository(
+fun UserRepositoriesComponent(
     modifier: Modifier = Modifier,
-    repositories: List<RepositoryUi>,
+    repositories: List<GitHubRepository>,
 ){
     LazyColumn (
         modifier = modifier,
@@ -36,15 +36,15 @@ fun BodyRepository(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         items(repositories){ repo ->
-            RepositoryItem(repository = repo)
+            UserRepositoryComponent(repository = repo)
         }
     }
 }
 
 @Composable
-fun RepositoryItem(
+fun UserRepositoryComponent(
     modifier: Modifier = Modifier,
-    repository: RepositoryUi
+    repository: GitHubRepository
 ) {
     OutlinedCard(
         modifier = modifier,
@@ -82,20 +82,9 @@ fun RepositoryItem(
 
 @Preview(showBackground = true)
 @Composable
-fun BodyRepositoryPreview(){
+fun UserRepositoriesComponentPreview(){
     val repositories by rememberSaveable {
         mutableStateOf(mockDevs[Random.nextInt(0,mockDevs.size-1)].repositories)
     }
-    BodyRepository(repositories = repositories)
-}
-
-@Preview
-@Composable
-fun RepositoryItemPreview(){
-    val repository by rememberSaveable {
-        mutableStateOf(
-            mockDevs[Random.nextInt(0,mockDevs.size-1)].repositories.first()
-        )
-    }
-    RepositoryItem(repository = repository)
+    UserRepositoriesComponent(repositories = repositories)
 }

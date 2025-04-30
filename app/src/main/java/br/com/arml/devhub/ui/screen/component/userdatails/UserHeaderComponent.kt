@@ -1,11 +1,13 @@
-package br.com.arml.devhub.ui.screen.component
+package br.com.arml.devhub.ui.screen.component.userdatails
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -21,31 +23,35 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import br.com.arml.devhub.model.entity.DevUiSaver
-import br.com.arml.devhub.model.mock.DevUiMock.mockDevs
+import br.com.arml.devhub.model.entity.GitHubUserSaver
+import br.com.arml.devhub.model.mock.GitHubUserMock.mockDevs
 import coil3.compose.AsyncImage
 
 @Composable
-fun HeaderRepository(
+fun UserHeaderComponent(
     modifier: Modifier = Modifier,
     name: String,
     username: String,
-    resume: String,
-    uriPhoto: String
+    bio: String,
+    avatarUrl: String
 ){
-    Column(modifier = modifier) {
-        TopHeader(uriPhoto = uriPhoto)
-        InfoHeader(
+    Column(
+        modifier = modifier,
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(16.dp)
+    ) {
+        UserTopHeaderComponent(uriPhoto = avatarUrl)
+        UserDetailsComponent(
             modifier = modifier,
             name = name,
             username = username,
-            resume = resume
+            resume = bio
         )
     }
 }
 
 @Composable
-fun TopHeader(
+fun UserTopHeaderComponent(
     modifier: Modifier = Modifier,
     uriPhoto: String
 ) {
@@ -87,7 +93,7 @@ fun TopHeader(
 }
 
 @Composable
-fun InfoHeader(modifier: Modifier, name: String, username: String, resume: String) {
+fun UserDetailsComponent(modifier: Modifier, name: String, username: String, resume: String) {
     Column(
         modifier = modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -101,6 +107,7 @@ fun InfoHeader(modifier: Modifier, name: String, username: String, resume: Strin
             text = username,
             style = MaterialTheme.typography.titleMedium
         )
+        Spacer(modifier = Modifier.padding(6.dp))
         Text(
             text = resume,
             style = MaterialTheme.typography.bodyMedium
@@ -110,13 +117,13 @@ fun InfoHeader(modifier: Modifier, name: String, username: String, resume: Strin
 
 @Preview
 @Composable
-fun HeaderRepositoryPreview(){
-    val dev = rememberSaveable(saver = DevUiSaver) { mockDevs.first() }
-    HeaderRepository(
+fun UserHeaderComponentPreview(){
+    val dev = rememberSaveable(saver = GitHubUserSaver) { mockDevs.first() }
+    UserHeaderComponent(
         name = dev.name,
-        username = dev.username,
-        resume = dev.resume,
-        uriPhoto = dev.uriPhoto
+        username = dev.login,
+        bio = dev.bio,
+        avatarUrl = dev.avatarUrl
     )
 }
 

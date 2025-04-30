@@ -1,5 +1,7 @@
 package br.com.arml.devhub.model.entity
 
+import androidx.compose.runtime.saveable.Saver
+import androidx.compose.runtime.saveable.listSaver
 import br.com.arml.devhub.model.source.network.dto.GitHubRepositoryDTO
 import br.com.arml.devhub.model.source.network.dto.GitHubUserDTO
 
@@ -20,5 +22,29 @@ data class GitHubUser (
                 repositories = repositories.map { GitHubRepository.from(it) }
             )
         }
+
+
     }
 }
+
+val GitHubUserSaver: Saver<GitHubUser, *> = listSaver(
+    save = { devUi ->
+        listOf(
+            devUi.name,
+            devUi.login,
+            devUi.bio,
+            devUi.avatarUrl,
+            devUi.repositories
+        )
+    },
+    restore = { list ->
+        @Suppress("UNCHECKED_CAST")
+        GitHubUser(
+            list[0] as String,
+            list[1] as String,
+            list[2] as String,
+            list[3] as String,
+            list[5] as List<GitHubRepository>
+        )
+    }
+)
