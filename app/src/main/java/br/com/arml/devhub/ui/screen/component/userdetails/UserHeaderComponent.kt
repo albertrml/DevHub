@@ -1,5 +1,7 @@
 package br.com.arml.devhub.ui.screen.component.userdetails
 
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -19,9 +21,12 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import br.com.arml.devhub.R
 import br.com.arml.devhub.model.entity.GitHubUserSaver
 import br.com.arml.devhub.model.mock.GitHubUserMock.mockDevs
 import coil3.compose.AsyncImage
@@ -70,19 +75,41 @@ fun UserTopHeaderComponent(
                 bottomEnd = 32.dp
             )
         ) {}
+        if (uriPhoto.isNotBlank()) {
+            AsyncImage(
+                model = uriPhoto,
+                contentDescription = "Developer image",
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .size(125.dp) // Tamanho da foto
+                    .clip(CircleShape) // Redondo!!
+                    .border(
+                        width = 4.dp,
+                        color = MaterialTheme.colorScheme.onBackground,
+                        shape = CircleShape
+                    )
+                    .align(Alignment.BottomCenter)
+            )
+        } else {
+            EmptyProfile(modifier = Modifier.align(Alignment.BottomCenter))
+        }
+    }
+}
 
-        AsyncImage(
-            model = uriPhoto,
+@Composable
+fun EmptyProfile(modifier: Modifier = Modifier){
+    Box(
+        modifier = modifier
+            .size(125.dp)
+            .background(color = MaterialTheme.colorScheme.onBackground, shape = CircleShape)
+    ) {
+        Image(
+            imageVector = ImageVector.vectorResource(id = R.drawable.ic_user),
             contentDescription = "Developer image",
             contentScale = ContentScale.Crop,
             modifier = Modifier
-                .size(125.dp) // Tamanho da foto
-                .clip(CircleShape) // Redondo!!
-                .border(
-                    width = 4.dp,
-                    color = MaterialTheme.colorScheme.onBackground,
-                    shape = CircleShape
-                )
+                .size(125.dp)
+                .clip(CircleShape)
                 .align(Alignment.BottomCenter)
         )
     }
