@@ -17,3 +17,20 @@ data class GitHubRepository (
         }
     }
 }
+
+/*val GitHubRepositorySaver: Saver<GitHubRepository, *> = listSaver(
+    save = { gitHubRepository ->
+        listOf(
+            gitHubRepository.name,
+            gitHubRepository.fullName,
+            gitHubRepository.description
+        )
+    },
+    restore = { list ->
+        GitHubRepository(
+            name = list[0],
+            fullName = list[1],
+            description = list[2]
+        )
+    }
+)*/

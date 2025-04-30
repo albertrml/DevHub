@@ -1,4 +1,4 @@
-package br.com.arml.devhub.ui.screen.component.userdatails
+package br.com.arml.devhub.ui.screen.component.userdetails
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -69,9 +68,6 @@ fun UserTopHeaderComponent(
                 topEnd = 0.dp,
                 bottomStart = 32.dp,
                 bottomEnd = 32.dp
-            ),
-            colors = CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.primary
             )
         ) {}
 
@@ -84,7 +80,7 @@ fun UserTopHeaderComponent(
                 .clip(CircleShape) // Redondo!!
                 .border(
                     width = 4.dp,
-                    color = MaterialTheme.colorScheme.background,
+                    color = MaterialTheme.colorScheme.onBackground,
                     shape = CircleShape
                 )
                 .align(Alignment.BottomCenter)

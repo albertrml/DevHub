@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -39,16 +38,13 @@ fun HomeHeaderComponent(
                 topEnd = 0.dp,
                 bottomStart = 32.dp,
                 bottomEnd = 32.dp
-            ),
-            colors = CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.primary
             )
         ) {}
         Box(
             modifier = Modifier
                 .size(125.dp)
                 .align(Alignment.BottomCenter)
-                .background(color = MaterialTheme.colorScheme.background, shape = CircleShape)
+                .background(color = MaterialTheme.colorScheme.onBackground, shape = CircleShape)
         ) {}
         Image(
             imageVector = ImageVector.vectorResource(id = R.drawable.ic_user),

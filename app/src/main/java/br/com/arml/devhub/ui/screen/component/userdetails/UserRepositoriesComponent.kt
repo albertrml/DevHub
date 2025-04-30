@@ -1,4 +1,4 @@
-package br.com.arml.devhub.ui.screen.component.userdatails
+package br.com.arml.devhub.ui.screen.component.userdetails
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement

@@ -4,6 +4,8 @@ agp = "8.9.2"
 coil = "3.1.0"
 composeBom = "2025.04.01"
 composeHilt = "1.2.0"
+composeNavigation = "2.8.9"
+composeRuntime = "1.8.0"
 coreKtx = "1.16.0"
 espressoCore = "3.6.1"
 googleFonts = "1.8.0"
@@ -23,6 +25,12 @@ androidx-compose-google-fonts = { group = "androidx.compose.ui", name = "ui-text
 
 # Dependency injection
 androidx-compose-hilt = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "composeHilt" }
+
+# navigation component
+androidx-compose-navigation = { group = "androidx.navigation", name = "navigation-compose", version.ref = "composeNavigation" }
+androidx-compose-animation = { group = "androidx.compose.animation", name = "animation", version.ref = "composeRuntime" }
+
+androidx-compose-runtime = { group = "androidx.compose.runtime", name = "runtime", version.ref = "composeRuntime" }
 
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }

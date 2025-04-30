@@ -6,25 +6,29 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import br.com.arml.devhub.R
-import br.com.arml.devhub.model.entity.GitHubUser
+import br.com.arml.devhub.model.entity.GitHubUserSaver
 import br.com.arml.devhub.model.mock.GitHubUserMock.mockDevs
-
 import br.com.arml.devhub.ui.component.AnimatedHorizontalDivider
-import br.com.arml.devhub.ui.screen.component.userdatails.UserRepositoriesComponent
-import br.com.arml.devhub.ui.screen.component.userdatails.UserHeaderComponent
-import kotlin.random.Random
+import br.com.arml.devhub.ui.screen.component.userdetails.UserHeaderComponent
+import br.com.arml.devhub.ui.screen.component.userdetails.UserRepositoriesComponent
 
 @Composable
 fun UserScreen(
     modifier: Modifier = Modifier,
-    user: GitHubUser
+    username: String,
+    navigateBack: () -> Unit = {},
 ){
+
+    val user by rememberSaveable (stateSaver = GitHubUserSaver) { mutableStateOf(mockDevs.first()) }
 
     Column(
         modifier = modifier
@@ -63,5 +67,5 @@ fun UserScreen(
 @Preview(showBackground = true)
 @Composable
 fun UserScreenPreview(){
-    UserScreen(user = mockDevs[Random.nextInt(0,mockDevs.size-1)])
+    UserScreen(username = "albertrml")
 }

@@ -42,8 +42,11 @@ android {
 dependencies {
 
     implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.compose.animation)
     implementation(libs.androidx.compose.google.fonts)
     implementation(libs.androidx.compose.hilt)
+    implementation(libs.androidx.compose.navigation)
+    implementation(libs.androidx.compose.runtime)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.material3)

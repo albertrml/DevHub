@@ -28,23 +28,27 @@ data class GitHubUser (
 }
 
 val GitHubUserSaver: Saver<GitHubUser, *> = listSaver(
-    save = { devUi ->
+    save = { gitHubUser ->
         listOf(
-            devUi.name,
-            devUi.login,
-            devUi.bio,
-            devUi.avatarUrl,
-            devUi.repositories
+            gitHubUser.login,
+            gitHubUser.name,
+            gitHubUser.bio,
+            gitHubUser.avatarUrl,
+            gitHubUser.repositories.map {
+                listOf(it.name, it.fullName, it.description)
+            }
         )
     },
     restore = { list ->
         @Suppress("UNCHECKED_CAST")
         GitHubUser(
-            list[0] as String,
-            list[1] as String,
-            list[2] as String,
-            list[3] as String,
-            list[5] as List<GitHubRepository>
+            login = list[0] as String,
+            name = list[1] as String,
+            bio = list[2] as String,
+            avatarUrl = list[3] as String,
+            repositories = (list[4] as List<List<String>>).map {
+                GitHubRepository(it[0], it[1], it[2])
+            }
         )
     }
 )
