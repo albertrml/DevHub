@@ -1,35 +1,22 @@
 package br.com.arml.devhub.ui.screen.component.userdetails
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import br.com.arml.devhub.R
 import br.com.arml.devhub.model.entity.GitHubUserSaver
 import br.com.arml.devhub.model.mock.GitHubUserMock.mockDevs
-import coil3.compose.AsyncImage
+import br.com.arml.devhub.ui.screen.component.common.AvatarProfileComponent
 
 @Composable
 fun UserHeaderComponent(
@@ -44,9 +31,9 @@ fun UserHeaderComponent(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        UserTopHeaderComponent(uriPhoto = avatarUrl)
+        AvatarProfileComponent(imageUrl = avatarUrl)
         UserDetailsComponent(
-            modifier = modifier,
+            modifier = modifier.align(Alignment.CenterHorizontally),
             name = name,
             username = username,
             resume = bio
@@ -55,70 +42,9 @@ fun UserHeaderComponent(
 }
 
 @Composable
-fun UserTopHeaderComponent(
-    modifier: Modifier = Modifier,
-    uriPhoto: String
-) {
-    Box(
-        modifier = modifier
-            .fillMaxWidth()
-            .height(200.dp)
-    ) {
-        Card(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(140.dp), // altura da parte de fundo
-            shape = RoundedCornerShape(
-                topStart = 0.dp,
-                topEnd = 0.dp,
-                bottomStart = 32.dp,
-                bottomEnd = 32.dp
-            )
-        ) {}
-        if (uriPhoto.isNotBlank()) {
-            AsyncImage(
-                model = uriPhoto,
-                contentDescription = "Developer image",
-                contentScale = ContentScale.Crop,
-                modifier = Modifier
-                    .size(125.dp) // Tamanho da foto
-                    .clip(CircleShape) // Redondo!!
-                    .border(
-                        width = 4.dp,
-                        color = MaterialTheme.colorScheme.onBackground,
-                        shape = CircleShape
-                    )
-                    .align(Alignment.BottomCenter)
-            )
-        } else {
-            EmptyProfile(modifier = Modifier.align(Alignment.BottomCenter))
-        }
-    }
-}
-
-@Composable
-fun EmptyProfile(modifier: Modifier = Modifier){
-    Box(
-        modifier = modifier
-            .size(125.dp)
-            .background(color = MaterialTheme.colorScheme.onBackground, shape = CircleShape)
-    ) {
-        Image(
-            imageVector = ImageVector.vectorResource(id = R.drawable.ic_user),
-            contentDescription = "Developer image",
-            contentScale = ContentScale.Crop,
-            modifier = Modifier
-                .size(125.dp)
-                .clip(CircleShape)
-                .align(Alignment.BottomCenter)
-        )
-    }
-}
-
-@Composable
 fun UserDetailsComponent(modifier: Modifier, name: String, username: String, resume: String) {
     Column(
-        modifier = modifier.fillMaxWidth(),
+        modifier = modifier.fillMaxWidth().padding(horizontal = 16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceBetween
     ) {
@@ -133,7 +59,8 @@ fun UserDetailsComponent(modifier: Modifier, name: String, username: String, res
         Spacer(modifier = Modifier.padding(6.dp))
         Text(
             text = resume,
-            style = MaterialTheme.typography.bodyMedium
+            style = MaterialTheme.typography.bodyMedium,
+            textAlign = TextAlign.Center
         )
     }
 }

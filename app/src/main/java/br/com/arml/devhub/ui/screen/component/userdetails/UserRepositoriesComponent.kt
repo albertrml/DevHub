@@ -31,18 +31,18 @@ fun UserRepositoriesComponent(
     repositories: List<GitHubRepository>,
 ){
     LazyColumn (
-        modifier = modifier,
+        modifier = modifier.padding(bottom = 24.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         items(repositories){ repo ->
-            UserRepositoryComponent(repository = repo)
+            RepositoryComponent(repository = repo)
         }
     }
 }
 
 @Composable
-fun UserRepositoryComponent(
+fun RepositoryComponent(
     modifier: Modifier = Modifier,
     repository: GitHubRepository
 ) {
